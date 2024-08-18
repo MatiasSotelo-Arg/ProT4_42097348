@@ -42,7 +42,7 @@ class LibroController {
     async delete(req, res) {
         const libro = req.body;
 
-        const [resultado] = await pool.query(`DELETE FROM libros WHERE id=(?)`, [libro.id]);
+        const [resultado] = await pool.query(`DELETE FROM libros WHERE isbn=(?)`, [libro.isbn]);
 
         res.json({"libro eliminado": resultado.affectedRows});
     }
