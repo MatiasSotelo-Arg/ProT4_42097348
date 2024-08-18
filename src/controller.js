@@ -33,9 +33,18 @@ class LibroController {
     async update(req, res) {
         const libro = req.body;
 
-        const [resultado] = await pool.query(`UPDATE Libros SET nombre=(?), autor=(?), categoria=(?), anio_publicacion=(?), isbn=(?) WHERE id=(?)`, [libro.nombre, libro.autor, libro.categoria, libro.anio_publicacion, libro.isbn, libro.id]);
+        const [resultado] = await pool.query(`UPDATE libros SET nombre=(?), autor=(?), categoria=(?), anio_publicacion=(?), isbn=(?) WHERE id=(?)`, [libro.nombre, libro.autor, libro.categoria, libro.anio_publicacion, libro.isbn, libro.id]);
 
         res.json({"registro actualizado": resultado.changedRows});
+    }
+
+    //Eliminar
+    async delete(req, res) {
+        const libro = req.body;
+
+        const [resultado] = await pool.query(`DELETE FROM libros WHERE id=(?)`, [libro.id]);
+
+        res.json({"libro eliminado": resultado.affectedRows});
     }
 }
 
