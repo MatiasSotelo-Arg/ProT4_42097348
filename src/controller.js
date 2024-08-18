@@ -24,9 +24,18 @@ class LibroController {
     async add(req, res) {
         const libro = req.body;
 
-        const [resultado] = await pool.query(`INSERT INTO libros(nombre,autor,anio_publicacion,isbn) VALUES (?, ?, ?, ?)`, [libro.nombre, libro.autor, libro.categoria, libro.anio_publicacion, libro.isbn]);
+        const [resultado] = await pool.query(`INSERT INTO libros(nombre,autor,categoria,anio_publicacion,isbn) VALUES (?, ?, ?, ?, ?)`, [libro.nombre, libro.autor, libro.categoria, libro.anio_publicacion, libro.isbn]);
 
         res.json({"Nuevo libro agregado:": resultado.insertId});
+    }
+
+    //Actualizar 
+    async update(req, res) {
+        const libro = req.body;
+
+        const [resultado] = await pool.query(`UPDATE Libros SET nombre=(?), autor=(?), categoria=(?), anio_publicacion=(?), isbn=(?) WHERE id=(?)`, [libro.nombre, libro.autor, libro.categoria, libro.anio_publicacion, libro.isbn, libro.id]);
+
+        res.json({"registro actualizado": resultado.changedRows});
     }
 }
 
