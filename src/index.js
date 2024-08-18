@@ -4,7 +4,7 @@ import {router} from './routes.js';
 
 const app = express();
 
-//instanciando metodos 
+//activo metodos 
 app.set('port',3000);
 app.use(morgan('dev'));
 app.use(express.json());
